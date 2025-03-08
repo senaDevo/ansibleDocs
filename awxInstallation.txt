@@ -1,5 +1,5 @@
 #Update system packages and install required dependencies:
-cd ~/ansible
+mkdir -p ~/ansible/awx; cd ~/ansible/awx
 sudo apt update
 sudo apt install -y curl wget apt-transport-https ca-certificates software-properties-common
 
