@@ -1,62 +1,62 @@
-Update system packages and install required dependencies:
+#Update system packages and install required dependencies:
 cd ~/ansible
 sudo apt update
 sudo apt install -y curl wget apt-transport-https ca-certificates software-properties-common
 
-Download and install Minikube:
+#Download and install Minikube:
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
-Verify installation:
+#Verify installation:
 minikube version
 
-Download and install Kubectl:
-$ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-$ chmod +x kubectl
-$ sudo mv kubectl /usr/local/bin/
+#Download and install Kubectl:
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
 
-Verify installation:
+#Verify installation:
 kubectl version --client
 
-Add Docker's official GPG key and repository:
+#Add Docker's official GPG key and repository:
 sudo apt install apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-Install Docker and verify:
+#Install Docker and verify:
 sudo apt update
 sudo apt install docker-ce
 docker --version
 
-Enable and start Docker:
+#Enable and start Docker:
 sudo systemctl start docker
 sudo systemctl enable docker
 
-Add user to the Docker group:
+#Add user to the Docker group:
 sudo usermod -aG docker $USER
 newgrp docker
 
-Start Minikube:
+#Start Minikube:
 minikube start --vm-driver=docker --addons=ingress
 
-Check Minikube status:
+#Check Minikube status:
 minikube status
 kubectl get pods -A
 
-Clone the AWX Operator repository and switch to the correct version:
+#Clone the AWX Operator repository and switch to the correct version:
 git clone https://github.com/ansible/awx-operator.git
 cd awx-operator/
 git checkout 2.19.0
 
-Set the namespace and deploy:
+#Set the namespace and deploy:
 export NAMESPACE=ansible-awx
 sudo apt install make
 make deploy
 
-Verify deployment:
+#Verify deployment:
 kubectl get pods -n ansible-awx
 
-Create the AWX deployment configuration:
+#Create the AWX deployment configuration:
 vi awx-ubuntu.yml
 ---
 apiVersion: awx.ansible.com/v1beta1
@@ -66,18 +66,16 @@ metadata:
 spec:
   service_type: nodeport
 
-Apply the configuration:
+#Apply the configuration:
 kubectl create -f awx-ubuntu.yml -n ansible-awx
 
-Monitor the deployment:
+#Monitor the deployment:
 kubectl get pods -n ansible-awx
 kubectl get svc -n ansible-awx
 kubectl logs -f deployments/awx-operator-controller-manager -c awx-manager -n ansible-awx
 
-Retrieve the admin password:
+#Retrieve the admin password to log in to the AWX web interface with user: admin
 kubectl get secret awx-ubuntu-admin-password -o jsonpath="{.data.password}" -n ansible-awx | base64 --decode; echo
 
-Retrieved password to log in to the AWX web interface with user: admin
-
-Retrieve the AWX service URL:
+#Retrieve the AWX service URL:
 minikube service awx-ubuntu-service --url -n ansible-awx
