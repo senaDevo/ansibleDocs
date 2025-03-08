@@ -1,0 +1,12 @@
+---
+- name: Run a shell command 
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Run a shell command to display space usage of /var/log
+      shell: "df -h /var/log"
+      register: result
+
+    - name: Display the result of the shell command
+      debug:
+        msg: "The output of the command is: {{ result.stdout }}"
