@@ -1,0 +1,26 @@
+---
+- name: Deploy Custom Apache Web Page
+  hosts: vm1
+  become: yes
+  vars:
+    serviceName: "apache2"
+  tasks:
+    - name: Gather hostname
+      command: hostname
+      register: server_hostname
+      changed_when: false
+
+    - name: Deploy custom index.html
+      template:
+        src: templates/index.html.j2
+        dest: /var/www/html/index.html
+      vars:
+        hostname: "{{ server_hostname.stdout }}"
+      notify: Restart Apache  # Trigger the handler when the template changes
+
+  handlers:
+    - name: Restart Apache
+      service:
+        name: "{{ serviceName }}"
+        state: restarted
+

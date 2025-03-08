@@ -1,0 +1,8 @@
+---
+- name: Example with global variables
+  hosts: all
+  tasks:
+    - name: Global Message
+      debug:
+        msg: "{{ all_message }}"
+

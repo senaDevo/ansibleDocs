@@ -1,0 +1,10 @@
+---
+- name: Example with external file variables
+  hosts: vms
+  vars_files:
+    - randomDir/external_vars.yml
+  tasks:
+    - name: Hello World for external
+      debug:
+        msg: "{{ external_message }}"
+

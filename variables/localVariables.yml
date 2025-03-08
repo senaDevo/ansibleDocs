@@ -1,0 +1,40 @@
+---
+- name: Demonstrate types of variables
+  hosts: vms
+  gather_facts: false
+
+  vars:
+    # String variable
+    app_name: "MyApp"
+    hello_message: "Hello World from Playbook"
+    # Number variable
+    max_connections: 100
+    # Boolean variable
+    is_production: true
+    # List variable
+    server_list:
+      - web01
+      - web02
+      - db01
+    # Dictionary variable
+    database_config:
+      host: "db01"
+      port: 3306
+      user: "admin"
+      password: "secret"
+  tasks:
+    - name: Display Strings
+      debug:
+        msg: "{{ hello_message }}. The application name is {{ app_name }}"
+    - name: Display Numbers
+      debug:
+        msg: "The maximum number of connections is {{ max_connections }}"
+    - name: Display Boolean
+      debug:
+        msg: "Is this a production environment? {{ is_production }}"
+    - name: Display List
+      debug:
+        msg: "The list of servers is {{ server_list }}"
+    - name: Display Dictionary
+      debug:
+        msg: "Database config: Host={{ database_config.host }}, Port={{ database_config.port }}, User={{ database_config.user }}, Password={{ database_config.password }}"

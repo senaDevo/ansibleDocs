@@ -1,0 +1,26 @@
+---
+- name: Copy a file to a remote server
+  hosts: vms
+  gather_facts: false
+  tasks:
+    - name: Copy a local file to the remote server
+      copy:
+        src: ~/ansible/playbooks/copyFile.yml
+        dest: ~/copyFile.yml.backup
+        owner: ubuntu # Set file owner (optional)
+        group: ubuntu # Set file group (optional)
+        mode: '0644'  # Set file permissions (optional)
+
+    - name: Set current date variable
+      set_fact:
+        current_date: "{{ lookup('pipe', 'date --iso-8601=seconds') }}"
+
+    - name: Add the current date at destination file
+      lineinfile:
+        path: ~/copyFile.yml.backup
+        line: "# File backup date: {{ current_date }}"                                
+        insertbefore: BOF                                                           
+        create: no
+
+
+

@@ -1,0 +1,7 @@
+---
+- name: Setup Apache
+  hosts: vms
+  become: yes
+  roles:
+    - apache
+

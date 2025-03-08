@@ -1,0 +1,8 @@
+---
+- name: Exemplo de Hello World com variáveis de ambiente
+  hosts: vm2
+  tasks:
+    - name: Example with enviroment variables
+      debug:
+        msg: "{{ lookup('env', 'HELLO_MESSAGE') }}"
+
