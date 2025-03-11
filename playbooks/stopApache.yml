@@ -1,6 +1,6 @@
 ---
 - name: Stop httpd (Apache) on Ubuntu
-  hosts: vms
+  hosts: ourServer
   become: yes
   vars:
     serviceName: "apache2"

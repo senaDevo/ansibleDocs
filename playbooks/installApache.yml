@@ -1,6 +1,6 @@
 ---
 - name: Install httpd (Apache) on Ubuntu
-  hosts: vms
+  hosts: ourServer
   become: yes
   vars:
     serviceName: "apache2"
@@ -11,9 +11,10 @@
         state: present
         update_cache: yes
 
-    - name: Start and Enable Apache
+    - name: Iniciar e habilitar o serviço Apache
       service:
         name: "{{ serviceName }}"
         state: started
         enabled: yes
+
 
