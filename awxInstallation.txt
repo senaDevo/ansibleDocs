@@ -25,7 +25,7 @@ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] 
 
 #Install Docker and verify:
 sudo apt update
-sudo apt install docker-ce
+sudo apt install docker-ce -y
 docker --version
 
 #Enable and start Docker:
