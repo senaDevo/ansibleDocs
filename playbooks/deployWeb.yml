@@ -1,6 +1,6 @@
 ---
 - name: Deploy Custom Apache Web Page
-  hosts: vm1
+  hosts: ourServer
   become: yes
   vars:
     serviceName: "apache2"
