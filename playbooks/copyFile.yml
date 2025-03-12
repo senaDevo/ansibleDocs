@@ -7,8 +7,8 @@
       copy:
         src: ~/ansible/playbooks/copyFile.yml
         dest: ~/copyFile.yml.backup
-        owner: ubuntu # Set file owner (optional)
-        group: ubuntu # Set file group (optional)
+        owner: gsena  # Set file owner (optional)
+        group: gsena  # Set file group (optional)
         mode: '0644'  # Set file permissions (optional)
 
     - name: Set current date variable
