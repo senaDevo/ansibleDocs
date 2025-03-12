@@ -1,6 +1,6 @@
 ---
 - name: Install multiple packages
-  hosts: vms
+  hosts: ourServer
   become: yes
   vars:
     packages:
