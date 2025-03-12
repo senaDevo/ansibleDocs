@@ -6,7 +6,7 @@
     - name: Copy a local file to the remote server
       copy:
         src: ~/ansible/playbooks/copyFile.yml
-        dest: ~/copyFile.yml.{{ my_user }}
+        dest: ~/copyFile.yml.{{ ansible_user_id }}
         owner: gsena  # Set file owner (optional)
         group: gsena  # Set file group (optional)
         mode: '0644'  # Set file permissions (optional)
