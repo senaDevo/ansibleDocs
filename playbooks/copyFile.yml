@@ -6,10 +6,10 @@
     - name: Copy a local file to the remote server
       copy:
         src: ~/ansible/playbooks/copyFile.yml
-        dest: ~/copyFile.yml.{{ ansible_user_id }}
+        dest: ~/copyFile.yml.{{ lookup('env', 'USER') }}
         owner: gsena  # Set file owner (optional)
         group: gsena  # Set file group (optional)
-        mode: '0644'  # Set file permissions (optional)
+        mode: '0644'    # Set file permissions (optional)
 
     - name: Set current date variable
       set_fact:
@@ -17,10 +17,7 @@
 
     - name: Add the current date at destination file
       lineinfile:
-        path: ~/copyFile.yml.backup
-        line: "# File backup date: {{ current_date }}"                                
-        insertbefore: BOF                                                           
+        path: ~/copyFile.yml.{{ lookup('env', 'USER') }}
+        line: "# File backup date: {{ current_date }}"
+        insertbefore: BOF
         create: no
-
-
-
