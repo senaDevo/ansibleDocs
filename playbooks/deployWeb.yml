@@ -1,6 +1,7 @@
 ---
 - name: Deploy Custom Apache Web Page
   hosts: ourServer
+  gather_facts: no
   become: yes
   vars:
     serviceName: "apache2"
