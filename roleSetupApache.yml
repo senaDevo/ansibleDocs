@@ -1,8 +1,0 @@
----
-- name: Setup Apache Web Server
-  hosts: ourServer
-  gather_facts: no
-  become: yes
-  roles:
-    - apache
-
