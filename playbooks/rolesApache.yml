@@ -1,6 +1,6 @@
 ---
 - name: Setup Apache
-  hosts: vms
+  hosts: ourServer
   become: yes
   roles:
     - apache
