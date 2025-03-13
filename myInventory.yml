@@ -1,5 +1,3 @@
-Same exercise but in the YML format:
-vi myInventory.yml
 all:
   hosts:
     vm1:
