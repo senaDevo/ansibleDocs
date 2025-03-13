@@ -1,0 +1,13 @@
+---
+- name: Print Inventory Variables
+  hosts: vms
+  gather_facts: no
+  tasks:
+    - name: Task to print vms group variables
+      debug:
+        msg:
+          - "VM Name: {{ inventory_hostname }}"
+          - "Ansible User: {{ ansible_user }}"
+          - "SSH Key: {{ ansible_ssh_private_key_file }}"
+          - "HTTP Port: {{ http_port }}"
+          - "DB Port: {{ db_port }}"
