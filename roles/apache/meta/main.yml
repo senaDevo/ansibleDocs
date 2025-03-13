@@ -1,0 +1,12 @@
+---
+galaxy_info:
+  author: Author’ Name
+  description: Role for installing and configuring Apache
+  license: MIT
+  min_ansible_version: 2.9
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+dependencies: []
+
