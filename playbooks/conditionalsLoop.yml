@@ -2,6 +2,7 @@
 - name: Install multiple packages
   hosts: ourServer
   become: yes
+  gather_facts: no
   vars:
     packages:
       - vim
